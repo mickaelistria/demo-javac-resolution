@@ -1,0 +1,18 @@
+Example for https://github.com/eclipse-jdtls/eclipse-jdt-core-incubator/issues/421
+
+Demonstrates that when resolving a method requires that all variants with same name
+and same amounts of arguments can be fully resolved for Javac to complete them.
+
+See only Utils.class is in bin/
+
+Then run `javac -cp bin/ -d bin/ src/p/Consumer.java`.
+Javac fails with
+```
+src/p/Consumer.java:5: error: cannot access NonAvailableDep
+		Utils.m("");
+		     ^
+  class file for p.NonAvailableDep not found
+1 error
+```
+
+ECJ seems to succeed with `java -jar ~/apps/eclipse-SDK/plugins/org.eclipse.jdt.core.compiler.batch_3.44.0.v20251030-1547.jar -cp bin/ -d bin/ src/p/Consumer.java` 
